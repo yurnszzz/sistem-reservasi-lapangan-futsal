@@ -225,43 +225,43 @@ Buka project di **IntelliJ IDEA**, lalu:
 
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
-| Setup repo GitHub & struktur proyek | Hasan | 🔴 High | ⬜ |
+| Setup repo GitHub & struktur proyek | Hasan | 🔴 High | ✅ |
 | Desain database & SQL script | Hasan | 🔴 High | ⬜ |
-| Class diagram & dokumentasi OOP | Anggota 4, Anggota 5 | 🔴 High | ⬜ |
+| Class diagram & dokumentasi OOP | Cantika, Varisha | 🔴 High | ⬜ |
 | `DatabaseConnection.java` (koneksi DB) | Hasan | 🔴 High | ⬜ |
-| Model classes (Lapangan, Pelanggan, Booking, Pembayaran) | Anggota 2, Anggota 3 | 🔴 High | ⬜ |
-| Interface `Printable` & `Searchable` | Anggota 3 | 🟡 Med | ⬜ |
+| Model classes (Lapangan, Pelanggan, Booking, Pembayaran) | Apip, Akbar | 🔴 High | ⬜ |
+| Interface `Printable` & `Searchable` | Akbar | 🟡 Med | ⬜ |
 
 ### Fase 2 — Core Logic
 
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
-| `LapanganDAO.java` (CRUD Lapangan) | Anggota 2 | 🔴 High | ⬜ |
-| `PelangganDAO.java` (CRUD Pelanggan) | Anggota 3 | 🔴 High | ⬜ |
+| `LapanganDAO.java` (CRUD Lapangan) | Apip | 🔴 High | ⬜ |
+| `PelangganDAO.java` (CRUD Pelanggan) | Akbar | 🔴 High | ⬜ |
 | `BookingDAO.java` (CRUD Booking) | Hasan | 🔴 High | ⬜ |
 | `PembayaranDAO.java` (CRUD Pembayaran) | Hasan | 🔴 High | ⬜ |
-| Inheritance & Polymorphism implementation | Anggota 2 | 🟡 Med | ⬜ |
-| Data dummy untuk testing | Anggota 4, Anggota 5 | 🟡 Med | ⬜ |
+| Inheritance & Polymorphism implementation | Akbar | 🟡 Med | ⬜ |
+| Data dummy untuk testing | Cantika, Varisha | 🟡 Med | ⬜ |
 
 ### Fase 3 — GUI Development
 
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
 | `MainFrame.java` (layout utama) | Hasan | 🔴 High | ⬜ |
-| `DashboardPanel.java` | Anggota 2 | 🔴 High | ⬜ |
-| `LapanganPanel.java` & `PelangganPanel.java` | Anggota 3 | 🔴 High | ⬜ |
+| `DashboardPanel.java` | Apip | 🔴 High | ⬜ |
+| `LapanganPanel.java` & `PelangganPanel.java` | Akbar | 🔴 High | ⬜ |
 | `BookingPanel.java` (dengan kalender) | Hasan | 🔴 High | ⬜ |
-| `PembayaranPanel.java` & `RiwayatPanel.java` | Anggota 2 | 🟡 Med | ⬜ |
-| Desain mockup GUI (wireframe) | Anggota 4, Anggota 5 | 🟡 Med | ⬜ |
+| `PembayaranPanel.java` & `RiwayatPanel.java` | Akbar | 🟡 Med | ⬜ |
+| Desain mockup GUI (wireframe) | Cantika, Varisha | 🟡 Med | ⬜ |
 
 ### Fase 4 — Integration & Polish
 
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
-| Integrasi GUI ↔ DAO ↔ Database | Hasan, Anggota 2, Anggota 3 | 🔴 High | ⬜ |
-| Testing & Bug fixing | Hasan, Anggota 2, Anggota 3 | 🔴 High | ⬜ |
-| Video demo program | Anggota 4, Anggota 5 | 🔴 High | ⬜ |
-| Laporan akhir (format PDF) | Anggota 4, Anggota 5 | 🔴 High | ⬜ |
+| Integrasi GUI ↔ DAO ↔ Database | Hasan, Apip, Akbar | 🔴 High | ⬜ |
+| Testing & Bug fixing | Hasan, Apip, Akbar | 🔴 High | ⬜ |
+| Video demo program | Cantika, Varisha | 🔴 High | ⬜ |
+| Laporan akhir (format PDF) | Cantika, Varisha | 🔴 High | ⬜ |
 | Final review & submission | Full Team | 🔴 High | ⬜ |
 
 ### Ringkasan Peran
