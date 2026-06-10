@@ -186,8 +186,8 @@ FutsalKu/
 
 ### Prasyarat
 - **Java JDK 17** atau lebih baru
-- **MySQL Server 8.0** atau lebih baru
-- **IntelliJ IDEA** (Community/Ultimate)
+- **MySQL Server 8.0/XAMPP/sejenisnya**
+- **IntelliJ IDEA/IDE lainnya**
 
 ### 1. Clone Repository
 ```bash
@@ -269,10 +269,10 @@ Buka project di **IntelliJ IDEA**, lalu:
 | Anggota | Fokus Utama | Estimasi Kontribusi |
 |---------|-------------|:-------------------:|
 | **Hasan** | Arsitektur, Database, Core GUI, Integrasi | ~30% |
-| **Anggota 2** | Model OOP, DAO Layer, GUI Panel | ~25% |
-| **Anggota 3** | Model OOP, DAO Layer, GUI Panel | ~20% |
-| **Anggota 4** | Class Diagram, Wireframe, Dokumentasi, Video | ~12.5% |
-| **Anggota 5** | Class Diagram, Wireframe, Dokumentasi, Video | ~12.5% |
+| **Akbar** | Model OOP, DAO Layer, GUI Panel | ~25% |
+| **Apip** | Model OOP, DAO Layer, GUI Panel | ~20% |
+| **Cantika** | Class Diagram, Wireframe, Dokumentasi, Video | ~12.5% |
+| **Varisha** | Class Diagram, Wireframe, Dokumentasi, Video | ~12.5% |
 
 > 💡 **Catatan:** Pembagian tugas bersifat fleksibel dan dapat disesuaikan sesuai progres tim.
 
