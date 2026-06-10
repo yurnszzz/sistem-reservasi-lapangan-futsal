@@ -1,5 +1,5 @@
-# 💰 Smart Expense Tracker
-### Pencatat Keuangan Mahasiswa — Aplikasi Desktop Berbasis Java
+# ⚽ FutsalKu — Sistem Reservasi Lapangan Futsal
+### Aplikasi Desktop Berbasis Java dengan GUI & Database
 
 > Project Akhir — Pemrograman Berorientasi Objek (OOP) | Semester 4 | 2026
 
@@ -7,123 +7,116 @@
 
 ## 👥 Tim
 
-| No. | Nama | Peran |
-|-----|------|-------|
-| 1 | Torikh Abdullah Naser | Lead Developer & Database |
-| 2 | Anggota 2 | Backend Developer |
-| 3 | Anggota 3 | Backend Developer |
-| 4 | Anggota 4 | UI/UX & Dokumentasi |
-| 5 | Anggota 5 | UI/UX & Testing |
+| No. | Nama | NIM | Peran |
+|-----|------|-----|-------|
+| 1 | Hasan Shofiyyurrahman | *(NIM)* | Project Lead & Backend Developer |
+| 2 | Anggota 2 | *(NIM)* | Backend Developer |
+| 3 | Anggota 3 | *(NIM)* | Backend Developer |
+| 4 | Anggota 4 | *(NIM)* | UI Designer & Documentation |
+| 5 | Anggota 5 | *(NIM)* | UI Designer & Documentation |
 
 ---
 
 ## 📌 Deskripsi Proyek
 
-**Smart Expense Tracker** adalah aplikasi desktop pencatat keuangan yang dirancang khusus untuk mahasiswa. Aplikasi ini membantu pengguna dalam mengelola keuangan pribadi melalui pencatatan pemasukan & pengeluaran, pengkategorian transaksi, visualisasi statistik bulanan, serta fitur target tabungan.
+**FutsalKu** adalah aplikasi desktop untuk mengelola reservasi lapangan futsal secara efisien. Aplikasi ini dibangun menggunakan **Java Swing (GUI)** dan terhubung ke **database MySQL** untuk penyimpanan data yang persisten.
 
-Dibangun menggunakan bahasa pemrograman **Java** dengan menerapkan prinsip-prinsip **Object-Oriented Programming (OOP)**, antarmuka **GUI (Graphical User Interface)** menggunakan Java Swing, dan integrasi **database MySQL** untuk penyimpanan data persisten.
+Sistem ini dirancang untuk memudahkan pengelola lapangan futsal dalam mengatur jadwal booking, mengelola data pelanggan & member, serta mencatat transaksi pembayaran — semua dalam satu aplikasi yang terintegrasi.
 
-### Alur Kerja Aplikasi
+### Alur Kerja Sistem
 
 ```
-User Login / Register
-        ↓
-Dashboard Utama (Ringkasan Keuangan)
-        ↓
-┌───────────────────────────────────────────┐
-│  Catat Transaksi (Pemasukan/Pengeluaran)  │
-│  Pilih Kategori & Input Nominal           │
-│  Simpan ke Database                       │
-└───────────────────────────────────────────┘
-        ↓
-Lihat Riwayat Transaksi & Statistik Bulanan
-        ↓
-Pantau Target Tabungan
+Operator membuka aplikasi FutsalKu
+         ↓
+Login ke sistem (Admin / Operator)
+         ↓
+Kelola data: Lapangan, Member, Booking
+         ↓
+Pelanggan melakukan reservasi lapangan
+         ↓
+Pilih lapangan (Indoor/Outdoor) & jadwal
+         ↓
+Proses pembayaran (Cash/Transfer)
+         ↓
+Bukti booking & riwayat tersimpan di database
 ```
 
 ---
 
-## 🎯 Fitur Aplikasi
+## 🎯 Fitur Utama
 
 | No. | Fitur | Deskripsi |
 |-----|-------|-----------|
-| 1 | **Autentikasi User** | Sistem login & register untuk keamanan data pribadi |
-| 2 | **Catat Pemasukan** | Input pemasukan dengan kategori (Gaji, Uang Saku, Freelance, dll.) |
-| 3 | **Catat Pengeluaran** | Input pengeluaran dengan kategori (Makan, Transportasi, Hiburan, dll.) |
-| 4 | **Riwayat Transaksi** | Menampilkan daftar seluruh transaksi dengan filter tanggal & kategori |
-| 5 | **Statistik Bulanan** | Visualisasi grafik pemasukan vs pengeluaran per bulan |
-| 6 | **Target Tabungan** | Pengaturan target tabungan dengan progress tracking |
-| 7 | **Manajemen Kategori** | CRUD kategori transaksi kustom |
-| 8 | **Laporan Keuangan** | Ringkasan keuangan (total pemasukan, pengeluaran, saldo) |
+| 1 | **Manajemen Lapangan** | CRUD data lapangan futsal (Indoor & Outdoor) |
+| 2 | **Manajemen Member** | Registrasi & pengelolaan data member/pelanggan |
+| 3 | **Booking Jadwal** | Reservasi lapangan dengan kalender jadwal interaktif |
+| 4 | **Pembayaran** | Pencatatan pembayaran (Cash & Transfer) |
+| 5 | **Riwayat Booking** | Melihat histori reservasi & status pembayaran |
+| 6 | **Dashboard** | Ringkasan statistik booking & pendapatan |
 
 ---
 
-## 🏗️ Konsep OOP yang Diterapkan
+## 🧬 Penerapan Konsep OOP
 
-Proyek ini menerapkan **4 pilar utama OOP** sebagai berikut:
+Proyek ini menerapkan **4 pilar utama** Object-Oriented Programming:
 
 ### 1. Inheritance (Pewarisan)
-Class `Pemasukan` dan `Pengeluaran` mewarisi class abstract `Transaksi`:
-```java
-public abstract class Transaksi {
-    protected double jumlah;
-    protected String deskripsi;
-    protected LocalDate tanggal;
-    protected Kategori kategori;
-    
-    public abstract String getTipe();
-}
+```
+Lapangan (Abstract Class)
+├── LapanganIndoor
+└── LapanganOutdoor
 
-public class Pemasukan extends Transaksi {
-    @Override
-    public String getTipe() { return "PEMASUKAN"; }
-}
-
-public class Pengeluaran extends Transaksi {
-    @Override
-    public String getTipe() { return "PENGELUARAN"; }
-}
+Pembayaran (Abstract Class)
+├── PembayaranCash
+└── PembayaranTransfer
 ```
 
 ### 2. Encapsulation (Enkapsulasi)
-Semua atribut bersifat `private` dengan akses melalui getter/setter:
-```java
-public class User {
-    private int id;
-    private String username;
-    private String password;
-    
-    public String getUsername() { return username; }
-    public void setUsername(String username) { this.username = username; }
-}
-```
+- Semua atribut class menggunakan access modifier `private`
+- Akses data melalui method `getter` dan `setter`
+- Validasi data dilakukan di dalam setter
 
 ### 3. Polymorphism (Polimorfisme)
-Method `hitungTotal()` pada class `Laporan` berperilaku berbeda tergantung tipe transaksi:
-```java
-public class Laporan {
-    public double hitungTotal(List<Transaksi> transaksiList) {
-        double total = 0;
-        for (Transaksi t : transaksiList) {
-            if (t instanceof Pemasukan) {
-                total += t.getJumlah();
-            } else if (t instanceof Pengeluaran) {
-                total -= t.getJumlah();
-            }
-        }
-        return total;
-    }
-}
-```
+- Method `hitungHarga()` di-override di setiap subclass `Lapangan`
+- Method `prosesTransaksi()` di-override di setiap subclass `Pembayaran`
+- Penggunaan dynamic binding untuk memproses pembayaran
 
 ### 4. Abstraction (Abstraksi)
-Class abstract `Transaksi` mendefinisikan blueprint umum tanpa implementasi spesifik:
-```java
-public abstract class Transaksi {
-    public abstract String getTipe();
-    public abstract double hitungDampakSaldo();
-}
+- Interface `Printable` — untuk mencetak bukti booking & pembayaran
+- Interface `Searchable` — untuk pencarian data member & booking
+- Abstract class sebagai template untuk `Lapangan` dan `Pembayaran`
+
+---
+
+## 🗄️ Desain Database
+
+Aplikasi menggunakan **MySQL** sebagai RDBMS dengan skema berikut:
+
+### Entity Relationship
+
 ```
+┌──────────────┐     ┌──────────────┐     ┌──────────────┐     ┌──────────────┐
+│   lapangan   │     │  pelanggan   │     │   booking    │     │  pembayaran  │
+├──────────────┤     ├──────────────┤     ├──────────────┤     ├──────────────┤
+│ id_lapangan  │◄────│ id_pelanggan │◄────│ id_booking   │────►│ id_pembayaran│
+│ nama         │     │ nama         │     │ id_lapangan  │     │ id_booking   │
+│ tipe         │     │ no_telp      │     │ id_pelanggan │     │ jumlah       │
+│ harga_per_jam│     │ email        │     │ tanggal      │     │ metode       │
+│ status       │     │ is_member    │     │ jam_mulai    │     │ status       │
+│ fasilitas    │     │ tgl_daftar   │     │ durasi       │     │ tgl_bayar    │
+└──────────────┘     └──────────────┘     │ total_harga  │     └──────────────┘
+                                          │ status       │
+                                          └──────────────┘
+```
+
+### Tabel Database
+
+| Tabel | Deskripsi | Jumlah Kolom |
+|-------|-----------|:------------:|
+| `lapangan` | Data lapangan futsal | 6 |
+| `pelanggan` | Data pelanggan/member | 6 |
+| `booking` | Data reservasi | 8 |
+| `pembayaran` | Data transaksi pembayaran | 6 |
 
 ---
 
@@ -132,218 +125,162 @@ public abstract class Transaksi {
 | Teknologi | Versi | Kegunaan |
 |-----------|-------|----------|
 | Java | JDK 17+ | Bahasa Pemrograman Utama |
-| Java Swing | - | GUI Framework |
+| Java Swing | — | GUI (Graphical User Interface) |
 | MySQL | 8.0+ | Database Management System |
-| JDBC | - | Database Connectivity |
-| IntelliJ IDEA | 2024+ | IDE Development |
-| Maven | 3.9+ | Dependency & Build Management |
-| Git & GitHub | - | Version Control & Collaboration |
+| JDBC | — | Koneksi Java ↔ MySQL |
+| IntelliJ IDEA | 2024+ | IDE untuk Development |
 
 ---
 
 ## 📁 Struktur Proyek
 
 ```
-SmartExpenseTracker/
-├── .gitignore
-├── README.md
-├── pom.xml                                   # Maven configuration
-├── docs/
-│   └── laporan_akhir.pdf                     # Laporan akhir project
+FutsalKu/
+├── src/
+│   └── main/
+│       └── java/
+│           └── com/
+│               └── futsalku/
+│                   ├── Main.java                    # Entry point aplikasi
+│                   ├── model/                        # Entity / POJO classes
+│                   │   ├── Lapangan.java             # Abstract class Lapangan
+│                   │   ├── LapanganIndoor.java       # Subclass Indoor
+│                   │   ├── LapanganOutdoor.java      # Subclass Outdoor
+│                   │   ├── Pelanggan.java            # Class Pelanggan
+│                   │   ├── Booking.java              # Class Booking
+│                   │   ├── Pembayaran.java           # Abstract class Pembayaran
+│                   │   ├── PembayaranCash.java       # Subclass Cash
+│                   │   └── PembayaranTransfer.java   # Subclass Transfer
+│                   ├── dao/                           # Data Access Object (CRUD)
+│                   │   ├── LapanganDAO.java
+│                   │   ├── PelangganDAO.java
+│                   │   ├── BookingDAO.java
+│                   │   └── PembayaranDAO.java
+│                   ├── gui/                           # Java Swing GUI
+│                   │   ├── MainFrame.java             # Frame utama
+│                   │   ├── DashboardPanel.java        # Panel dashboard
+│                   │   ├── LapanganPanel.java         # Panel kelola lapangan
+│                   │   ├── PelangganPanel.java        # Panel kelola pelanggan
+│                   │   ├── BookingPanel.java          # Panel booking
+│                   │   ├── PembayaranPanel.java       # Panel pembayaran
+│                   │   └── RiwayatPanel.java          # Panel riwayat booking
+│                   ├── util/                           # Utility classes
+│                   │   ├── DatabaseConnection.java    # Koneksi database
+│                   │   └── ValidationHelper.java      # Helper validasi input
+│                   └── interfaces/                    # Interface OOP
+│                       ├── Printable.java             # Interface cetak bukti
+│                       └── Searchable.java            # Interface pencarian
 ├── sql/
-│   └── schema.sql                            # Database schema & seed data
-└── src/
-    └── main/
-        ├── java/
-        │   └── com/
-        │       └── smartexpense/
-        │           ├── Main.java             # Entry point aplikasi
-        │           ├── model/
-        │           │   ├── User.java         # Model user/akun
-        │           │   ├── Transaksi.java    # Abstract class transaksi
-        │           │   ├── Pemasukan.java    # Class pemasukan (extends Transaksi)
-        │           │   ├── Pengeluaran.java  # Class pengeluaran (extends Transaksi)
-        │           │   ├── Kategori.java     # Model kategori transaksi
-        │           │   └── Laporan.java      # Model laporan keuangan
-        │           ├── dao/
-        │           │   ├── DatabaseConnection.java  # Koneksi database
-        │           │   ├── UserDAO.java              # Data Access Object - User
-        │           │   ├── TransaksiDAO.java         # Data Access Object - Transaksi
-        │           │   └── KategoriDAO.java          # Data Access Object - Kategori
-        │           ├── view/
-        │           │   ├── LoginFrame.java           # Halaman login
-        │           │   ├── RegisterFrame.java        # Halaman register
-        │           │   ├── DashboardFrame.java       # Dashboard utama
-        │           │   ├── TransaksiPanel.java       # Panel input transaksi
-        │           │   ├── RiwayatPanel.java         # Panel riwayat transaksi
-        │           │   ├── StatistikPanel.java       # Panel statistik grafik
-        │           │   └── TabunganPanel.java        # Panel target tabungan
-        │           └── util/
-        │               ├── FormatUtil.java           # Utility formatting (currency, date)
-        │               └── ValidationUtil.java       # Utility validasi input
-        └── resources/
-            ├── icons/                                # Icon dan asset gambar
-            └── config.properties                     # Konfigurasi database
-```
-
----
-
-## 📐 Database Schema
-
-```sql
--- Tabel User
-CREATE TABLE users (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    nama_lengkap VARCHAR(100),
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
--- Tabel Kategori
-CREATE TABLE kategori (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    nama VARCHAR(50) NOT NULL,
-    tipe ENUM('PEMASUKAN', 'PENGELUARAN') NOT NULL,
-    icon VARCHAR(50)
-);
-
--- Tabel Transaksi
-CREATE TABLE transaksi (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    kategori_id INT NOT NULL,
-    jumlah DECIMAL(15,2) NOT NULL,
-    deskripsi TEXT,
-    tanggal DATE NOT NULL,
-    tipe ENUM('PEMASUKAN', 'PENGELUARAN') NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (kategori_id) REFERENCES kategori(id)
-);
-
--- Tabel Target Tabungan
-CREATE TABLE target_tabungan (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    nama_target VARCHAR(100) NOT NULL,
-    jumlah_target DECIMAL(15,2) NOT NULL,
-    jumlah_terkumpul DECIMAL(15,2) DEFAULT 0,
-    deadline DATE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
-);
+│   └── futsalku_db.sql                               # Script pembuatan database
+├── lib/
+│   └── mysql-connector-j-x.x.x.jar                  # JDBC Driver MySQL
+├── docs/
+│   └── laporan/                                      # Laporan akhir
+├── .gitignore
+└── README.md                                         # File ini
 ```
 
 ---
 
 ## ⚙️ Cara Menjalankan
 
-### 1. Prerequisites
-- **JDK 17+** sudah terinstall
-- **MySQL 8.0+** sudah terinstall dan berjalan
-- **IntelliJ IDEA** (recommended) atau IDE Java lainnya
-- **Maven** (biasanya sudah bundled di IntelliJ)
+### Prasyarat
+- **Java JDK 17** atau lebih baru
+- **MySQL Server 8.0** atau lebih baru
+- **IntelliJ IDEA** (Community/Ultimate)
+
+### 1. Clone Repository
+```bash
+git clone https://github.com/yurnszzz/sistem-reservasi-lapangan-futsal.git
+cd sistem-reservasi-lapangan-futsal
+```
 
 ### 2. Setup Database
 ```bash
 # Login ke MySQL
 mysql -u root -p
 
-# Buat database
-CREATE DATABASE smart_expense_tracker;
-USE smart_expense_tracker;
-
-# Jalankan script schema
-SOURCE sql/schema.sql;
+# Jalankan script SQL
+source sql/futsalku_db.sql
 ```
 
 ### 3. Konfigurasi Koneksi Database
-Edit file `src/main/resources/config.properties`:
-```properties
-db.url=jdbc:mysql://localhost:3306/smart_expense_tracker
-db.username=root
-db.password=your_password
+Edit file `src/main/java/com/futsalku/util/DatabaseConnection.java`:
+```java
+private static final String URL = "jdbc:mysql://localhost:3306/futsalku_db";
+private static final String USER = "root";
+private static final String PASSWORD = "your_password";
 ```
 
-### 4. Clone & Jalankan Proyek
-```bash
-# Clone repository
-git clone https://github.com/<username>/smart-expense-tracker.git
-cd smart-expense-tracker
-
-# Build & Run dengan Maven
-mvn clean compile exec:java
-```
-
-Atau buka project di **IntelliJ IDEA**, lalu jalankan `Main.java`.
+### 4. Jalankan Aplikasi
+Buka project di **IntelliJ IDEA**, lalu:
+1. Tambahkan `mysql-connector-j-x.x.x.jar` ke project library
+2. Klik kanan `Main.java` → **Run 'Main'**
 
 ---
 
 ## 📋 Pembagian Tugas
 
-### Fase 1 — Setup & Fondasi (Minggu 1)
+### Sprint 1 — Foundation (Minggu 1–2)
 
-| No. | Task | PIC | Status |
-|-----|------|-----|--------|
-| 1 | Setup repository GitHub & project structure | Torikh Abdullah Naser | ⬜ |
-| 2 | Desain database schema & buat script SQL | Torikh Abdullah Naser | ⬜ |
-| 3 | Implementasi `DatabaseConnection.java` | Torikh Abdullah Naser | ⬜ |
-| 4 | Implementasi class model (`User`, `Transaksi`, `Kategori`, `Laporan`) | Anggota 2 | ⬜ |
-| 5 | Implementasi class `Pemasukan` & `Pengeluaran` (inheritance) | Anggota 3 | ⬜ |
+| Task | PIC | Prioritas | Status |
+|------|-----|:---------:|:------:|
+| Setup repo GitHub & struktur proyek | Hasan | 🔴 High | ⬜ |
+| Desain database & SQL script | Hasan | 🔴 High | ⬜ |
+| Class diagram & dokumentasi OOP | Anggota 4, Anggota 5 | 🔴 High | ⬜ |
+| `DatabaseConnection.java` (koneksi DB) | Hasan | 🔴 High | ⬜ |
+| Model classes (Lapangan, Pelanggan, Booking, Pembayaran) | Anggota 2, Anggota 3 | 🔴 High | ⬜ |
+| Interface `Printable` & `Searchable` | Anggota 3 | 🟡 Med | ⬜ |
 
-### Fase 2 — Backend & Database (Minggu 2)
+### Sprint 2 — Core Logic (Minggu 3–4)
 
-| No. | Task | PIC | Status |
-|-----|------|-----|--------|
-| 1 | Implementasi `UserDAO.java` (CRUD user, login, register) | Torikh Abdullah Naser | ⬜ |
-| 2 | Implementasi `TransaksiDAO.java` (CRUD transaksi) | Anggota 2 | ⬜ |
-| 3 | Implementasi `KategoriDAO.java` (CRUD kategori) | Anggota 3 | ⬜ |
-| 4 | Implementasi `Laporan.java` — polymorphism perhitungan | Anggota 2 | ⬜ |
-| 5 | Implementasi utility classes (`FormatUtil`, `ValidationUtil`) | Anggota 3 | ⬜ |
+| Task | PIC | Prioritas | Status |
+|------|-----|:---------:|:------:|
+| `LapanganDAO.java` (CRUD Lapangan) | Anggota 2 | 🔴 High | ⬜ |
+| `PelangganDAO.java` (CRUD Pelanggan) | Anggota 3 | 🔴 High | ⬜ |
+| `BookingDAO.java` (CRUD Booking) | Hasan | 🔴 High | ⬜ |
+| `PembayaranDAO.java` (CRUD Pembayaran) | Hasan | 🔴 High | ⬜ |
+| Inheritance & Polymorphism implementation | Anggota 2 | 🟡 Med | ⬜ |
+| Data dummy untuk testing | Anggota 4, Anggota 5 | 🟡 Med | ⬜ |
 
-### Fase 3 — GUI Development (Minggu 3)
+### Sprint 3 — GUI Development (Minggu 5–6)
 
-| No. | Task | PIC | Status |
-|-----|------|-----|--------|
-| 1 | Desain & implementasi `LoginFrame` + `RegisterFrame` | Torikh Abdullah Naser | ⬜ |
-| 2 | Desain & implementasi `DashboardFrame` | Torikh Abdullah Naser | ⬜ |
-| 3 | Desain & implementasi `TransaksiPanel` | Anggota 2 | ⬜ |
-| 4 | Desain & implementasi `RiwayatPanel` | Anggota 3 | ⬜ |
-| 5 | Desain mockup/wireframe halaman GUI | Anggota 4 | ⬜ |
-| 6 | Menyiapkan aset visual (icon, warna, font) untuk GUI | Anggota 5 | ⬜ |
+| Task | PIC | Prioritas | Status |
+|------|-----|:---------:|:------:|
+| `MainFrame.java` (layout utama) | Hasan | 🔴 High | ⬜ |
+| `DashboardPanel.java` | Anggota 2 | 🔴 High | ⬜ |
+| `LapanganPanel.java` & `PelangganPanel.java` | Anggota 3 | 🔴 High | ⬜ |
+| `BookingPanel.java` (dengan kalender) | Hasan | 🔴 High | ⬜ |
+| `PembayaranPanel.java` & `RiwayatPanel.java` | Anggota 2 | 🟡 Med | ⬜ |
+| Desain mockup GUI (wireframe) | Anggota 4, Anggota 5 | 🟡 Med | ⬜ |
 
-### Fase 4 — Fitur Lanjutan & Integrasi (Minggu 4)
+### Sprint 4 — Integration & Polish (Minggu 7)
 
-| No. | Task | PIC | Status |
-|-----|------|-----|--------|
-| 1 | Implementasi `StatistikPanel` (grafik bulanan) | Torikh Abdullah Naser | ⬜ |
-| 2 | Implementasi `TabunganPanel` (target tabungan) | Anggota 2 | ⬜ |
-| 3 | Integrasi seluruh panel ke `DashboardFrame` | Torikh Abdullah Naser | ⬜ |
-| 4 | Penyusunan laporan akhir (BAB I - BAB III) | Anggota 4 | ⬜ |
-| 5 | Penyusunan laporan akhir (BAB IV - Lampiran) | Anggota 5 | ⬜ |
+| Task | PIC | Prioritas | Status |
+|------|-----|:---------:|:------:|
+| Integrasi GUI ↔ DAO ↔ Database | Hasan, Anggota 2, Anggota 3 | 🔴 High | ⬜ |
+| Testing & Bug fixing | Hasan, Anggota 2, Anggota 3 | 🔴 High | ⬜ |
+| Video demo program | Anggota 4, Anggota 5 | 🔴 High | ⬜ |
+| Laporan akhir (format PDF) | Anggota 4, Anggota 5 | 🔴 High | ⬜ |
+| Final review & submission | Full Team | 🔴 High | ⬜ |
 
-### Fase 5 — Testing & Finalisasi (Minggu 5)
+### Ringkasan Peran
 
-| No. | Task | PIC | Status |
-|-----|------|-----|--------|
-| 1 | Bug fixing & code review | Torikh Abdullah Naser | ⬜ |
-| 2 | Testing keseluruhan fitur | Anggota 5 | ⬜ |
-| 3 | Pembuatan video demo program | Anggota 4 | ⬜ |
-| 4 | Finalisasi laporan akhir | Anggota 4 & Anggota 5 | ⬜ |
-| 5 | Final review & submission | Torikh Abdullah Naser | ⬜ |
+| Anggota | Fokus Utama | Estimasi Kontribusi |
+|---------|-------------|:-------------------:|
+| **Hasan** | Arsitektur, Database, Core GUI, Integrasi | ~30% |
+| **Anggota 2** | Model OOP, DAO Layer, GUI Panel | ~25% |
+| **Anggota 3** | Model OOP, DAO Layer, GUI Panel | ~20% |
+| **Anggota 4** | Class Diagram, Wireframe, Dokumentasi, Video | ~12.5% |
+| **Anggota 5** | Class Diagram, Wireframe, Dokumentasi, Video | ~12.5% |
+
+> 💡 **Catatan:** Pembagian tugas bersifat fleksibel dan dapat disesuaikan sesuai progres tim.
 
 ---
 
-## 📊 Ringkasan Kontribusi
+## 🔗 Screenshot Aplikasi
 
-| Anggota | Fokus Utama | Estimasi Kontribusi |
-|---------|-------------|---------------------|
-| **Torikh Abdullah Naser** | Lead Developer — Setup, Database, GUI Core, Integrasi, Bug Fix | ⭐⭐⭐⭐⭐ |
-| **Anggota 2** | Backend Developer — Model, DAO, Panel Transaksi & Tabungan | ⭐⭐⭐⭐ |
-| **Anggota 3** | Backend Developer — Inheritance classes, DAO, Panel Riwayat, Utility | ⭐⭐⭐⭐ |
-| **Anggota 4** | UI/UX & Dokumentasi — Desain mockup, Laporan akhir, Video demo | ⭐⭐⭐ |
-| **Anggota 5** | UI/UX & Testing — Aset visual, Testing, Laporan akhir | ⭐⭐⭐ |
+> *(Coming Soon — akan ditambahkan setelah development selesai)*
 
 ---
 
@@ -353,19 +290,14 @@ Atau buka project di **IntelliJ IDEA**, lalu jalankan `Main.java`.
 - Java Swing Tutorial: https://docs.oracle.com/javase/tutorial/uiswing/
 - MySQL Documentation: https://dev.mysql.com/doc/
 - JDBC Tutorial: https://docs.oracle.com/javase/tutorial/jdbc/
-- Maven Getting Started: https://maven.apache.org/guides/getting-started/
+- Design Patterns in Java: https://refactoring.guru/design-patterns/java
 
 ---
 
-## 📝 Catatan Penting
+## 📄 Lisensi
 
-> **Ketentuan Project Akhir:**
-> - ✅ Aplikasi berbasis objek menggunakan Java
-> - ✅ Minimal 3 konsep OOP (Inheritance, Encapsulation, Polymorphism, Abstraction)
-> - ✅ Menerapkan konsep GUI dalam Java (Java Swing)
-> - ✅ Menampilkan data dari database (MySQL + JDBC)
-> - ✅ Deliverables: Source Code, Video Demo, Laporan Akhir (PDF)
+Proyek ini dibuat untuk keperluan akademik sebagai Project Akhir mata kuliah **Pemrograman Berorientasi Objek (OOP)** — Semester 4, 2026.
 
 ---
 
-*Project Akhir — Pemrograman Berorientasi Objek | Semester 4 | 2026*
+*Universitas Pembangunan Nasional "Veteran" Jakarta — Informatika 2024*

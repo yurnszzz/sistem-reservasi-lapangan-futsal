@@ -1,5 +1,0 @@
-# Database Configuration
-# Sesuaikan dengan konfigurasi MySQL lokal Anda
-db.url=jdbc:mysql://localhost:3306/smart_expense_tracker
-db.username=root
-db.password=your_password_here
