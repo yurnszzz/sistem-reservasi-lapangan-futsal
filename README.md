@@ -9,11 +9,11 @@
 
 | No. | Nama | NIM | Peran |
 |-----|------|-----|-------|
-| 1 | Hasan Shofiyyurrahman | *(NIM)* | Project Lead & Backend Developer |
-| 2 | Anggota 2 | *(NIM)* | Backend Developer |
-| 3 | Anggota 3 | *(NIM)* | Backend Developer |
-| 4 | Anggota 4 | *(NIM)* | UI Designer & Documentation |
-| 5 | Anggota 5 | *(NIM)* | UI Designer & Documentation |
+| 1 | Hasan Shofiyyur Rahman | 2410512011 | Project Lead & Backend Developer |
+| 2 | Muhammad Akbar Al Islami | 2410512012 | Backend Developer |
+| 3 | Rifqi Afif Zhain | 2410512013 | Backend Developer |
+| 4 | Cantika Nurwulan Suci | 2410512022 | UI Designer & Documentation |
+| 5 | Varisha Aira Dalimunthe | 2410512027 | UI Designer & Documentation |
 
 ---
 
