@@ -221,7 +221,7 @@ Buka project di **IntelliJ IDEA**, lalu:
 
 ## 📋 Pembagian Tugas
 
-### Sprint 1 — Foundation (Minggu 1–2)
+### Fase 1 — Foundation
 
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
@@ -232,7 +232,7 @@ Buka project di **IntelliJ IDEA**, lalu:
 | Model classes (Lapangan, Pelanggan, Booking, Pembayaran) | Anggota 2, Anggota 3 | 🔴 High | ⬜ |
 | Interface `Printable` & `Searchable` | Anggota 3 | 🟡 Med | ⬜ |
 
-### Sprint 2 — Core Logic (Minggu 3–4)
+### Fase 2 — Core Logic
 
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
@@ -243,7 +243,7 @@ Buka project di **IntelliJ IDEA**, lalu:
 | Inheritance & Polymorphism implementation | Anggota 2 | 🟡 Med | ⬜ |
 | Data dummy untuk testing | Anggota 4, Anggota 5 | 🟡 Med | ⬜ |
 
-### Sprint 3 — GUI Development (Minggu 5–6)
+### Fase 3 — GUI Development
 
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
@@ -254,7 +254,7 @@ Buka project di **IntelliJ IDEA**, lalu:
 | `PembayaranPanel.java` & `RiwayatPanel.java` | Anggota 2 | 🟡 Med | ⬜ |
 | Desain mockup GUI (wireframe) | Anggota 4, Anggota 5 | 🟡 Med | ⬜ |
 
-### Sprint 4 — Integration & Polish (Minggu 7)
+### Fase 4 — Integration & Polish
 
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
