@@ -300,4 +300,4 @@ Proyek ini dibuat untuk keperluan akademik sebagai Project Akhir mata kuliah **P
 
 ---
 
-*Universitas Pembangunan Nasional "Veteran" Jakarta — Informatika 2024*
+*Universitas Pembangunan Nasional "Veteran" Jakarta — S1 Sistem Informasi 2024*
