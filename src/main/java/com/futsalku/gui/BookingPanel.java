@@ -43,7 +43,8 @@ public class BookingPanel extends JPanel {
     private List<Pelanggan> pelangganList;
 
     // Format Rupiah
-    private final NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(Locale.of("id", "ID"));
+    @SuppressWarnings("deprecation")
+    private final NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
 
     public BookingPanel() {
         setLayout(new BorderLayout(0, 0));
@@ -330,7 +331,7 @@ public class BookingPanel extends JPanel {
     // Hitung dan update total harga otomatis
     private void updateTotalHarga() {
         int idx = cmbLapangan.getSelectedIndex();
-        if (idx >= 0 && idx < lapanganList.size()) {
+        if (lapanganList != null && idx >= 0 && idx < lapanganList.size()) {
             Lapangan lap = lapanganList.get(idx);
             int durasi = (int) spnDurasi.getValue();
             double total = lap.hitungHarga(durasi); // Polymorphism!
