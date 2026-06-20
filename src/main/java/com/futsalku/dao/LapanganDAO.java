@@ -17,10 +17,8 @@ import java.util.List;
  */
 public class LapanganDAO {
 
-    /**
-     * Mengambil semua data lapangan dari database
-     * Menggunakan Polymorphism: return LapanganIndoor/LapanganOutdoor sesuai tipe
-     */
+    // Mengambil semua data lapangan dari database
+    // Menggunakan Polymorphism: return LapanganIndoor/LapanganOutdoor sesuai tipe
     public List<Lapangan> getAll() throws SQLException {
         List<Lapangan> list = new ArrayList<>();
         String sql = "SELECT * FROM lapangan";
@@ -37,9 +35,7 @@ public class LapanganDAO {
         return list;
     }
 
-    /**
-     * Mengambil data lapangan berdasarkan ID
-     */
+    // Mengambil data lapangan berdasarkan ID
     public Lapangan getById(int id) throws SQLException {
         String sql = "SELECT * FROM lapangan WHERE id_lapangan = ?";
 
@@ -56,9 +52,7 @@ public class LapanganDAO {
         return null;
     }
 
-    /**
-     * Mengambil lapangan yang tersedia saja
-     */
+    // Mengambil lapangan yang tersedia saja
     public List<Lapangan> getAvailable() throws SQLException {
         List<Lapangan> list = new ArrayList<>();
         String sql = "SELECT * FROM lapangan WHERE status = 'Tersedia'";
@@ -74,9 +68,7 @@ public class LapanganDAO {
         return list;
     }
 
-    /**
-     * Menambahkan data lapangan baru ke database
-     */
+    // Menambahkan data lapangan baru ke database
     public boolean insert(Lapangan lapangan) throws SQLException {
         String sql = "INSERT INTO lapangan (nama, tipe, harga_per_jam, status, fasilitas) VALUES (?, ?, ?, ?, ?)";
 
@@ -93,9 +85,7 @@ public class LapanganDAO {
         }
     }
 
-    /**
-     * Mengupdate data lapangan di database
-     */
+    // Mengupdate data lapangan di database
     public boolean update(Lapangan lapangan) throws SQLException {
         String sql = "UPDATE lapangan SET nama = ?, tipe = ?, harga_per_jam = ?, status = ?, fasilitas = ? WHERE id_lapangan = ?";
 
@@ -113,9 +103,7 @@ public class LapanganDAO {
         }
     }
 
-    /**
-     * Menghapus data lapangan dari database berdasarkan ID
-     */
+    // Menghapus data lapangan dari database berdasarkan ID
     public boolean delete(int id) throws SQLException {
         String sql = "DELETE FROM lapangan WHERE id_lapangan = ?";
 
@@ -127,11 +115,9 @@ public class LapanganDAO {
         }
     }
 
-    /**
-     * Helper method: Membuat objek Lapangan dari ResultSet
-     * Menggunakan Polymorphism — membuat LapanganIndoor atau LapanganOutdoor
-     * berdasarkan tipe yang disimpan di database
-     */
+    // Helper method: Membuat objek Lapangan dari ResultSet
+    // Menggunakan Polymorphism — membuat LapanganIndoor atau LapanganOutdoor
+    // berdasarkan tipe yang disimpan di database
     private Lapangan createLapanganFromResultSet(ResultSet rs) throws SQLException {
         String tipe = rs.getString("tipe");
         int id = rs.getInt("id_lapangan");

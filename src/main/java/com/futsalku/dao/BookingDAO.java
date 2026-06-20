@@ -10,14 +10,12 @@ import java.util.List;
 /**
  * BookingDAO — Data Access Object untuk tabel booking
  * Mengelola operasi CRUD ke database
- * 
+
  * PIC: Hasan (Hasan Shofiyyur Rahman)
  */
 public class BookingDAO {
 
-    /**
-     * Mengambil semua data booking dari database
-     */
+    // Mengambil semua data booking dari database
     public List<Booking> getAll() throws SQLException {
         List<Booking> list = new ArrayList<>();
         String sql = "SELECT * FROM booking ORDER BY tanggal DESC, jam_mulai ASC";
@@ -33,9 +31,7 @@ public class BookingDAO {
         return list;
     }
 
-    /**
-     * Mengambil data booking berdasarkan ID
-     */
+    // Mengambil data booking berdasarkan ID
     public Booking getById(int id) throws SQLException {
         String sql = "SELECT * FROM booking WHERE id_booking = ?";
 
@@ -52,10 +48,8 @@ public class BookingDAO {
         return null;
     }
 
-    /**
-     * Mengambil daftar booking berdasarkan tanggal tertentu
-     * Berguna untuk melihat jadwal booking pada tanggal tertentu
-     */
+    // Mengambil daftar booking berdasarkan tanggal tertentu
+    // Berguna untuk melihat jadwal booking pada tanggal tertentu
     public List<Booking> getByDate(Date tanggal) throws SQLException {
         List<Booking> list = new ArrayList<>();
         String sql = "SELECT * FROM booking WHERE tanggal = ? ORDER BY jam_mulai ASC";
@@ -73,10 +67,8 @@ public class BookingDAO {
         return list;
     }
 
-    /**
-     * Mengambil daftar booking berdasarkan ID pelanggan
-     * Berguna untuk melihat riwayat booking pelanggan tertentu
-     */
+    // Mengambil daftar booking berdasarkan ID pelanggan
+    // Berguna untuk melihat riwayat booking pelanggan tertentu
     public List<Booking> getByPelanggan(int idPelanggan) throws SQLException {
         List<Booking> list = new ArrayList<>();
         String sql = "SELECT * FROM booking WHERE id_pelanggan = ? ORDER BY tanggal DESC";
@@ -94,10 +86,8 @@ public class BookingDAO {
         return list;
     }
 
-    /**
-     * Mengecek apakah lapangan sudah dibooking pada tanggal dan jam tertentu
-     * Mencegah double booking
-     */
+    // Mengecek apakah lapangan sudah dibooking pada tanggal dan jam tertentu
+    // Mencegah double booking
     public boolean isLapanganBooked(int idLapangan, Date tanggal, Time jamMulai, int durasi) throws SQLException {
         String sql = "SELECT COUNT(*) FROM booking " +
                      "WHERE id_lapangan = ? AND tanggal = ? AND status != 'Cancelled' " +
@@ -124,9 +114,7 @@ public class BookingDAO {
         return false;
     }
 
-    /**
-     * Menambahkan booking baru ke database
-     */
+    // Menambahkan booking baru ke database
     public boolean insert(Booking booking) throws SQLException {
         String sql = "INSERT INTO booking (id_lapangan, id_pelanggan, tanggal, jam_mulai, durasi, total_harga, status) " +
                      "VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -157,9 +145,7 @@ public class BookingDAO {
         }
     }
 
-    /**
-     * Mengupdate data booking di database
-     */
+    // Mengupdate data booking di database
     public boolean update(Booking booking) throws SQLException {
         String sql = "UPDATE booking SET id_lapangan = ?, id_pelanggan = ?, tanggal = ?, " +
                      "jam_mulai = ?, durasi = ?, total_harga = ?, status = ? WHERE id_booking = ?";
@@ -180,9 +166,7 @@ public class BookingDAO {
         }
     }
 
-    /**
-     * Mengupdate status booking saja
-     */
+    // Mengupdate status booking saja
     public boolean updateStatus(int idBooking, String status) throws SQLException {
         String sql = "UPDATE booking SET status = ? WHERE id_booking = ?";
 
@@ -196,9 +180,7 @@ public class BookingDAO {
         }
     }
 
-    /**
-     * Menghapus data booking dari database berdasarkan ID
-     */
+    // Menghapus data booking dari database berdasarkan ID
     public boolean delete(int id) throws SQLException {
         String sql = "DELETE FROM booking WHERE id_booking = ?";
 
@@ -210,9 +192,7 @@ public class BookingDAO {
         }
     }
 
-    /**
-     * Menghitung total booking hari ini (untuk Dashboard)
-     */
+    // Menghitung total booking hari ini (untuk Dashboard)
     public int countTodayBookings() throws SQLException {
         String sql = "SELECT COUNT(*) FROM booking WHERE tanggal = CURRENT_DATE AND status != 'Cancelled'";
 
@@ -227,9 +207,7 @@ public class BookingDAO {
         return 0;
     }
 
-    /**
-     * Helper method: Membuat objek Booking dari ResultSet
-     */
+    // Helper method: Membuat objek Booking dari ResultSet
     private Booking createBookingFromResultSet(ResultSet rs) throws SQLException {
         return new Booking(
                 rs.getInt("id_booking"),

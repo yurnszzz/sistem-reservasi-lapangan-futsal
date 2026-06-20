@@ -13,15 +13,13 @@ import java.util.List;
  * PembayaranDAO — Data Access Object untuk tabel pembayaran
  * Mengelola operasi CRUD ke database
  * Menggunakan Polymorphism untuk membuat PembayaranCash / PembayaranTransfer
- * 
+ 
  * PIC: Hasan (Hasan Shofiyyur Rahman)
  */
 public class PembayaranDAO {
 
-    /**
-     * Mengambil semua data pembayaran dari database
-     * Menggunakan Polymorphism: return PembayaranCash/PembayaranTransfer sesuai metode
-     */
+    // Mengambil semua data pembayaran dari database
+    // Menggunakan Polymorphism: return PembayaranCash/PembayaranTransfer sesuai metode
     public List<Pembayaran> getAll() throws SQLException {
         List<Pembayaran> list = new ArrayList<>();
         String sql = "SELECT * FROM pembayaran ORDER BY tgl_bayar DESC";
@@ -37,9 +35,7 @@ public class PembayaranDAO {
         return list;
     }
 
-    /**
-     * Mengambil data pembayaran berdasarkan ID
-     */
+    // Mengambil data pembayaran berdasarkan ID
     public Pembayaran getById(int id) throws SQLException {
         String sql = "SELECT * FROM pembayaran WHERE id_pembayaran = ?";
 
@@ -56,9 +52,8 @@ public class PembayaranDAO {
         return null;
     }
 
-    /**
-     * Mengambil data pembayaran berdasarkan ID booking
-     */
+    
+    // Mengambil data pembayaran berdasarkan ID booking
     public Pembayaran getByBookingId(int idBooking) throws SQLException {
         String sql = "SELECT * FROM pembayaran WHERE id_booking = ?";
 
@@ -75,9 +70,7 @@ public class PembayaranDAO {
         return null;
     }
 
-    /**
-     * Mengambil daftar pembayaran yang masih pending (untuk konfirmasi transfer)
-     */
+    // Mengambil daftar pembayaran yang masih pending (untuk konfirmasi transfer)
     public List<Pembayaran> getPending() throws SQLException {
         List<Pembayaran> list = new ArrayList<>();
         String sql = "SELECT * FROM pembayaran WHERE status = 'Pending' ORDER BY tgl_bayar ASC";
@@ -93,9 +86,7 @@ public class PembayaranDAO {
         return list;
     }
 
-    /**
-     * Menambahkan pembayaran baru ke database
-     */
+    // Menambahkan pembayaran baru ke database
     public boolean insert(Pembayaran pembayaran) throws SQLException {
         String sql = "INSERT INTO pembayaran (id_booking, jumlah, metode, status) VALUES (?, ?, ?, ?)";
 
@@ -122,9 +113,7 @@ public class PembayaranDAO {
         }
     }
 
-    /**
-     * Mengupdate status pembayaran (misal: dari Pending → Lunas)
-     */
+    // Mengupdate status pembayaran (misal: dari Pending → Lunas)
     public boolean updateStatus(int idPembayaran, String status) throws SQLException {
         String sql = "UPDATE pembayaran SET status = ? WHERE id_pembayaran = ?";
 
@@ -138,9 +127,7 @@ public class PembayaranDAO {
         }
     }
 
-    /**
-     * Menghapus data pembayaran dari database berdasarkan ID
-     */
+    // Menghapus data pembayaran dari database berdasarkan ID
     public boolean delete(int id) throws SQLException {
         String sql = "DELETE FROM pembayaran WHERE id_pembayaran = ?";
 
@@ -152,9 +139,7 @@ public class PembayaranDAO {
         }
     }
 
-    /**
-     * Menghitung total pendapatan (status Lunas saja, untuk Dashboard)
-     */
+    // Menghitung total pendapatan (status Lunas saja, untuk Dashboard)
     public double getTotalPendapatan() throws SQLException {
         String sql = "SELECT COALESCE(SUM(jumlah), 0) FROM pembayaran WHERE status = 'Lunas'";
 
@@ -169,11 +154,9 @@ public class PembayaranDAO {
         return 0;
     }
 
-    /**
-     * Helper method: Membuat objek Pembayaran dari ResultSet
-     * Menggunakan Polymorphism — membuat PembayaranCash atau PembayaranTransfer
-     * berdasarkan metode yang disimpan di database
-     */
+    // Helper method: Membuat objek Pembayaran dari ResultSet
+    // Menggunakan Polymorphism — membuat PembayaranCash atau PembayaranTransfer
+    // berdasarkan metode yang disimpan di database
     private Pembayaran createPembayaranFromResultSet(ResultSet rs) throws SQLException {
         String metode = rs.getString("metode");
         int id = rs.getInt("id_pembayaran");

@@ -17,9 +17,7 @@ import java.util.List;
  */
 public class PelangganDAO implements Searchable<Pelanggan> {
 
-    /**
-     * Mengambil semua data pelanggan dari database
-     */
+    // Mengambil semua data pelanggan dari database
     public List<Pelanggan> getAll() throws SQLException {
         List<Pelanggan> list = new ArrayList<>();
         String sql = "SELECT * FROM pelanggan ORDER BY nama";
@@ -35,9 +33,7 @@ public class PelangganDAO implements Searchable<Pelanggan> {
         return list;
     }
 
-    /**
-     * Mengambil data pelanggan berdasarkan ID
-     */
+    // Mengambil data pelanggan berdasarkan ID
     public Pelanggan getById(int id) throws SQLException {
         String sql = "SELECT * FROM pelanggan WHERE id_pelanggan = ?";
 
@@ -54,9 +50,7 @@ public class PelangganDAO implements Searchable<Pelanggan> {
         return null;
     }
 
-    /**
-     * Mengambil daftar pelanggan yang berstatus member
-     */
+    // Mengambil daftar pelanggan yang berstatus member
     public List<Pelanggan> getMembers() throws SQLException {
         List<Pelanggan> list = new ArrayList<>();
         String sql = "SELECT * FROM pelanggan WHERE is_member = TRUE ORDER BY nama";
@@ -72,9 +66,7 @@ public class PelangganDAO implements Searchable<Pelanggan> {
         return list;
     }
 
-    /**
-     * Menambahkan pelanggan baru ke database
-     */
+    // Menambahkan pelanggan baru ke database
     public boolean insert(Pelanggan pelanggan) throws SQLException {
         String sql = "INSERT INTO pelanggan (nama, no_telp, email, is_member) VALUES (?, ?, ?, ?)";
 
@@ -90,9 +82,7 @@ public class PelangganDAO implements Searchable<Pelanggan> {
         }
     }
 
-    /**
-     * Mengupdate data pelanggan di database
-     */
+    // Mengupdate data pelanggan di database
     public boolean update(Pelanggan pelanggan) throws SQLException {
         String sql = "UPDATE pelanggan SET nama = ?, no_telp = ?, email = ?, is_member = ? WHERE id_pelanggan = ?";
 
@@ -109,9 +99,7 @@ public class PelangganDAO implements Searchable<Pelanggan> {
         }
     }
 
-    /**
-     * Menghapus data pelanggan dari database berdasarkan ID
-     */
+    // Menghapus data pelanggan dari database berdasarkan ID
     public boolean delete(int id) throws SQLException {
         String sql = "DELETE FROM pelanggan WHERE id_pelanggan = ?";
 
@@ -123,10 +111,8 @@ public class PelangganDAO implements Searchable<Pelanggan> {
         }
     }
 
-    /**
-     * Implementasi interface Searchable — Abstraction
-     * Mencari pelanggan berdasarkan keyword (nama, no_telp, atau email)
-     */
+    // Implementasi interface Searchable — Abstraction
+    // Mencari pelanggan berdasarkan keyword (nama, no_telp, atau email)
     @Override
     public List<Pelanggan> cari(String keyword) {
         List<Pelanggan> list = new ArrayList<>();
@@ -151,9 +137,7 @@ public class PelangganDAO implements Searchable<Pelanggan> {
         return list;
     }
 
-    /**
-     * Helper method: Membuat objek Pelanggan dari ResultSet
-     */
+    // Helper method: Membuat objek Pelanggan dari ResultSet
     private Pelanggan createPelangganFromResultSet(ResultSet rs) throws SQLException {
         return new Pelanggan(
                 rs.getInt("id_pelanggan"),
