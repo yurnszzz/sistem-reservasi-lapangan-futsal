@@ -236,12 +236,12 @@ Buka project di **IntelliJ IDEA**, lalu:
 
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
-| `LapanganDAO.java` (CRUD Lapangan) | Apip | 🔴 High | ⬜ |
-| `PelangganDAO.java` (CRUD Pelanggan) | Akbar | 🔴 High | ⬜ |
-| `BookingDAO.java` (CRUD Booking) | Hasan | 🔴 High | ⬜ |
-| `PembayaranDAO.java` (CRUD Pembayaran) | Hasan | 🔴 High | ⬜ |
-| Inheritance & Polymorphism implementation | Akbar | 🟡 Med | ⬜ |
-| Data dummy untuk testing | Cantika, Varisha | 🟡 Med | ⬜ |
+| `LapanganDAO.java` (CRUD Lapangan) | Apip | 🔴 High | ✅ |
+| `PelangganDAO.java` (CRUD Pelanggan) | Akbar | 🔴 High | ✅ |
+| `BookingDAO.java` (CRUD Booking) | Hasan | 🔴 High | ✅ |
+| `PembayaranDAO.java` (CRUD Pembayaran) | Hasan | 🔴 High | ✅ |
+| Inheritance & Polymorphism implementation | Akbar | 🟡 Med | ✅ |
+| Data dummy untuk testing | Cantika, Varisha | 🟡 Med | ✅ |
 
 ### Fase 3 — GUI Development
 
