@@ -226,11 +226,11 @@ Buka project di **IntelliJ IDEA**, lalu:
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
 | Setup repo GitHub & struktur proyek | Hasan | 🔴 High | ✅ |
-| Desain database & SQL script | Hasan | 🔴 High | ⬜ |
-| Class diagram & dokumentasi OOP | Cantika, Varisha | 🔴 High | ⬜ |
-| `DatabaseConnection.java` (koneksi DB) | Hasan | 🔴 High | ⬜ |
-| Model classes (Lapangan, Pelanggan, Booking, Pembayaran) | Apip, Akbar | 🔴 High | ⬜ |
-| Interface `Printable` & `Searchable` | Akbar | 🟡 Med | ⬜ |
+| Desain database & SQL script | Hasan | 🔴 High | ✅ |
+| Class diagram & dokumentasi OOP | Cantika, Varisha | 🔴 High | ✅ |
+| `DatabaseConnection.java` (koneksi DB) | Hasan | 🔴 High | ✅ |
+| Model classes (Lapangan, Pelanggan, Booking, Pembayaran) | Apip, Akbar | 🔴 High | ✅ |
+| Interface `Printable` & `Searchable` | Akbar | 🟡 Med | ✅ |
 
 ### Fase 2 — Core Logic
 
