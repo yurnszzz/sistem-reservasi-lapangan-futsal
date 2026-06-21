@@ -248,7 +248,7 @@ Buka project di **IntelliJ IDEA**, lalu:
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
 | `MainFrame.java` (layout utama) | Hasan | 🔴 High | ✅ |
-| `DashboardPanel.java` | Apip | 🔴 High | ⬜ |
+| `DashboardPanel.java` | Apip | 🔴 High | ✅ |
 | `LapanganPanel.java` & `PelangganPanel.java` | Akbar | 🔴 High | ✅ |
 | `BookingPanel.java` (dengan kalender) | Hasan | 🔴 High | ✅ |
 | `PembayaranPanel.java` & `RiwayatPanel.java` | Akbar | 🟡 Med | ✅ |
