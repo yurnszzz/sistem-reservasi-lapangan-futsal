@@ -249,10 +249,10 @@ Buka project di **IntelliJ IDEA**, lalu:
 |------|-----|:---------:|:------:|
 | `MainFrame.java` (layout utama) | Hasan | 🔴 High | ✅ |
 | `DashboardPanel.java` | Apip | 🔴 High | ⬜ |
-| `LapanganPanel.java` & `PelangganPanel.java` | Akbar | 🔴 High | ⬜ |
+| `LapanganPanel.java` & `PelangganPanel.java` | Akbar | 🔴 High | ✅ |
 | `BookingPanel.java` (dengan kalender) | Hasan | 🔴 High | ✅ |
-| `PembayaranPanel.java` & `RiwayatPanel.java` | Akbar | 🟡 Med | ⬜ |
-| Desain mockup GUI (wireframe) | Cantika, Varisha | 🟡 Med | ⬜ |
+| `PembayaranPanel.java` & `RiwayatPanel.java` | Akbar | 🟡 Med | ✅ |
+| Desain mockup GUI (wireframe) | Cantika, Varisha | 🟡 Med | ✅ |
 
 ### Fase 4 — Integration & Polish
 
