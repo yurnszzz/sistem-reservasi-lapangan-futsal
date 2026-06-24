@@ -258,8 +258,8 @@ Buka project di **IntelliJ IDEA**, lalu:
 
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
-| Integrasi GUI ↔ DAO ↔ Database | Hasan, Apip, Akbar | 🔴 High | ⬜ |
-| Testing & Bug fixing | Hasan, Apip, Akbar | 🔴 High | ⬜ |
+| Integrasi GUI ↔ DAO ↔ Database | Hasan, Apip, Akbar | 🔴 High | ✅ |
+| Testing & Bug fixing | Hasan, Apip, Akbar | 🔴 High | ✅ |
 | Video demo program | Cantika, Varisha | 🔴 High | ⬜ |
 | Laporan akhir (format PDF) | Cantika, Varisha | 🔴 High | ⬜ |
 | Final review & submission | Full Team | 🔴 High | ⬜ |
