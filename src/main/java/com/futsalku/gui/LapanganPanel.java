@@ -6,7 +6,6 @@ import com.futsalku.model.LapanganIndoor;
 import com.futsalku.model.LapanganOutdoor;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.text.NumberFormat;
@@ -28,7 +27,7 @@ public class LapanganPanel extends JPanel {
     private DefaultTableModel tableModel;
 
     // Format Rupiah
-    @SuppressWarnings("deprecation")
+    // @SuppressWarnings("deprecation")
     private final NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
 
     public LapanganPanel() {
@@ -123,10 +122,10 @@ public class LapanganPanel extends JPanel {
         JPanel btnPanel = new JPanel(new GridLayout(2, 2, 10, 10));
         btnPanel.setBackground(Color.WHITE);
 
-        JButton btnSimpan = createButton("Simpan", new Color(37, 99, 235));
-        JButton btnUbah = createButton("Ubah", new Color(245, 158, 11));
-        JButton btnHapus = createButton("Hapus", new Color(220, 38, 38));
-        JButton btnClear = createButton("Bersihkan", new Color(100, 116, 139));
+        RoundedButton btnSimpan = new RoundedButton("Simpan", new Color(37, 99, 235), Color.WHITE);
+        RoundedButton btnUbah = new RoundedButton("Ubah", new Color(245, 158, 11), Color.WHITE);
+        RoundedButton btnHapus = new RoundedButton("Hapus", new Color(220, 38, 38), Color.WHITE);
+        RoundedButton btnClear = new RoundedButton("Bersihkan", new Color(100, 116, 139), Color.WHITE);
 
         btnSimpan.addActionListener(e -> simpanData());
         btnUbah.addActionListener(e -> ubahData());
@@ -158,17 +157,9 @@ public class LapanganPanel extends JPanel {
         };
 
         tblLapangan = new JTable(tableModel);
-        tblLapangan.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        tblLapangan.setRowHeight(30);
-        tblLapangan.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
-        tblLapangan.getTableHeader().setBackground(new Color(241, 245, 249));
-
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        TableStyleHelper.styleTable(tblLapangan, new int[]{0, 2, 4});
+        
         tblLapangan.getColumnModel().getColumn(0).setPreferredWidth(40);
-        tblLapangan.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        tblLapangan.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
-        tblLapangan.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
 
         // Event saat baris diklik
         tblLapangan.getSelectionModel().addListSelectionListener(e -> {
@@ -218,7 +209,7 @@ public class LapanganPanel extends JPanel {
         cmb.setBackground(Color.WHITE);
     }
 
-    private JButton createButton(String text, Color color) {
+    /* private JButton createButton(String text, Color color) {
         JButton btn = new JButton(text);
         btn.setFont(new Font("Segoe UI", Font.BOLD, 13));
         btn.setForeground(Color.WHITE);
@@ -227,7 +218,7 @@ public class LapanganPanel extends JPanel {
         btn.setFocusPainted(false);
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         return btn;
-    }
+    }*/
 
     // ================= LOGIKA OOP & DATABASE (CRUD) ================= //
 
@@ -354,5 +345,9 @@ public class LapanganPanel extends JPanel {
             return false;
         }
         return true;
+    }
+
+    public void refreshData() {
+        refreshTableData();
     }
 }

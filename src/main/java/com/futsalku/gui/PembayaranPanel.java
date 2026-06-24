@@ -34,8 +34,6 @@ public class PembayaranPanel extends JPanel {
     private DefaultTableModel modelAntrean, modelRiwayat;
     private List<Booking> listAntrean;
 
-    // Formatters
-    @SuppressWarnings("deprecation")
     private final NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm");
 
@@ -110,8 +108,7 @@ public class PembayaranPanel extends JPanel {
             @Override public boolean isCellEditable(int row, int col) { return false; }
         };
         tblAntrean = new JTable(modelAntrean);
-        tblAntrean.setRowHeight(25);
-        tblAntrean.getTableHeader().setBackground(new Color(241, 245, 249));
+        TableStyleHelper.styleTable(tblAntrean, new int[]{0, 1, 2});
         tblAntrean.getSelectionModel().addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting() && tblAntrean.getSelectedRow() != -1) {
                 int row = tblAntrean.getSelectedRow();
@@ -134,38 +131,71 @@ public class PembayaranPanel extends JPanel {
                 BorderFactory.createEmptyBorder(20, 20, 20, 20)
         ));
 
-        JPanel formContent = new JPanel();
-        formContent.setLayout(new BoxLayout(formContent, BoxLayout.Y_AXIS));
+        JPanel formContent = new JPanel(new GridBagLayout());
         formContent.setBackground(Color.WHITE);
 
-        txtIdBooking = addReadOnlyField(formContent, "ID Booking Terpilih");
-        txtTagihan = addReadOnlyField(formContent, "Total Tagihan");
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
 
-        formContent.add(createLabel("Jumlah Bayar (Rp)"));
+        // 1. ID Booking
+        gbc.gridy = 0;
+        gbc.insets = new Insets(0, 0, 5, 0);
+        formContent.add(createLabel("ID Booking Terpilih"), gbc);
+        gbc.gridy = 1;
+        gbc.insets = new Insets(0, 0, 15, 0);
+        txtIdBooking = new JTextField();
+        txtIdBooking.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        txtIdBooking.setBackground(new Color(241, 245, 249));
+        txtIdBooking.setEditable(false);
+        txtIdBooking.setPreferredSize(new Dimension(0, 35));
+        formContent.add(txtIdBooking, gbc);
+
+        // 2. Total Tagihan
+        gbc.gridy = 2;
+        gbc.insets = new Insets(0, 0, 5, 0);
+        formContent.add(createLabel("Total Tagihan"), gbc);
+        gbc.gridy = 3;
+        gbc.insets = new Insets(0, 0, 15, 0);
+        txtTagihan = new JTextField();
+        txtTagihan.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        txtTagihan.setBackground(new Color(241, 245, 249));
+        txtTagihan.setEditable(false);
+        txtTagihan.setPreferredSize(new Dimension(0, 35));
+        formContent.add(txtTagihan, gbc);
+
+        // 3. Jumlah Bayar
+        gbc.gridy = 4;
+        gbc.insets = new Insets(0, 0, 5, 0);
+        formContent.add(createLabel("Jumlah Bayar (Rp)"), gbc);
+        gbc.gridy = 5;
+        gbc.insets = new Insets(0, 0, 15, 0);
         txtJumlahBayar = new JTextField();
         txtJumlahBayar.setFont(new Font("Segoe UI", Font.BOLD, 18));
         txtJumlahBayar.setForeground(new Color(16, 185, 129));
-        txtJumlahBayar.setMaximumSize(new Dimension(Integer.MAX_VALUE, 40));
-        formContent.add(txtJumlahBayar);
-        formContent.add(Box.createVerticalStrut(15));
+        txtJumlahBayar.setPreferredSize(new Dimension(0, 40));
+        formContent.add(txtJumlahBayar, gbc);
 
-        formContent.add(createLabel("Metode Pembayaran"));
+        // 4. Metode Pembayaran
+        gbc.gridy = 6;
+        gbc.insets = new Insets(0, 0, 5, 0);
+        formContent.add(createLabel("Metode Pembayaran"), gbc);
+        gbc.gridy = 7;
+        gbc.insets = new Insets(0, 0, 25, 0);
         cmbMetode = new JComboBox<>(new String[]{"Cash", "Transfer"});
         cmbMetode.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        cmbMetode.setMaximumSize(new Dimension(Integer.MAX_VALUE, 35));
+        cmbMetode.setPreferredSize(new Dimension(0, 35));
         cmbMetode.setBackground(Color.WHITE);
-        formContent.add(cmbMetode);
-        formContent.add(Box.createVerticalStrut(25));
+        formContent.add(cmbMetode, gbc);
 
-        JButton btnProses = new JButton("Proses & Cetak Struk");
-        btnProses.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        btnProses.setBackground(new Color(37, 99, 235));
-        btnProses.setForeground(Color.WHITE);
-        btnProses.setFocusPainted(false);
-        btnProses.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnProses.setMaximumSize(new Dimension(Integer.MAX_VALUE, 45));
+        // 5. Tombol Proses
+        gbc.gridy = 8;
+        gbc.insets = new Insets(0, 0, 0, 0);
+        RoundedButton btnProses = new RoundedButton("Proses & Cetak Struk", new Color(37, 99, 235), Color.WHITE);
+        btnProses.setPreferredSize(new Dimension(0, 45));
         btnProses.addActionListener(e -> prosesPembayaran());
-        formContent.add(btnProses);
+        formContent.add(btnProses, gbc);
 
         pnlForm.add(formContent, BorderLayout.NORTH);
         wrapper.add(pnlForm, BorderLayout.CENTER);
@@ -191,10 +221,8 @@ public class PembayaranPanel extends JPanel {
             @Override public boolean isCellEditable(int row, int col) { return false; }
         };
         tblRiwayat = new JTable(modelRiwayat);
-        tblRiwayat.setRowHeight(35);
-        tblRiwayat.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        tblRiwayat.getTableHeader().setBackground(new Color(241, 245, 249));
-
+        TableStyleHelper.styleTable(tblRiwayat, new int[]{0, 1, 2, 4});
+ 
         // VISUALISASI DATA: Custom Cell Renderer untuk Status
         tblRiwayat.getColumnModel().getColumn(4).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
@@ -202,6 +230,15 @@ public class PembayaranPanel extends JPanel {
                 Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 setHorizontalAlignment(JLabel.CENTER);
                 setFont(new Font("Segoe UI", Font.BOLD, 12));
+                setBorder(BorderFactory.createEmptyBorder(0, 12, 0, 12));
+                
+                // Zebra Background
+                if (isSelected) {
+                    c.setBackground(table.getSelectionBackground());
+                } else {
+                    c.setBackground(row % 2 == 0 ? Color.WHITE : new Color(248, 250, 252));
+                }
+                
                 if ("Lunas".equals(value)) {
                     setForeground(new Color(16, 185, 129)); // Hijau
                 } else {
@@ -224,17 +261,7 @@ public class PembayaranPanel extends JPanel {
         return lbl;
     }
 
-    private JTextField addReadOnlyField(JPanel parent, String label) {
-        parent.add(createLabel(label));
-        JTextField txt = new JTextField();
-        txt.setFont(new Font("Segoe UI", Font.BOLD, 14));
-        txt.setBackground(new Color(241, 245, 249)); // Warna abu-abu (readonly)
-        txt.setEditable(false);
-        txt.setMaximumSize(new Dimension(Integer.MAX_VALUE, 35));
-        parent.add(txt);
-        parent.add(Box.createVerticalStrut(15));
-        return txt;
-    }
+
 
     // ================= LOGIKA OOP & DATABASE ================= //
 
@@ -365,5 +392,9 @@ public class PembayaranPanel extends JPanel {
         txtStruk.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         JOptionPane.showMessageDialog(this, txtStruk, "Cetak Struk Pembayaran", JOptionPane.PLAIN_MESSAGE);
+    }
+
+    public void refreshData() {
+        refreshAllData();
     }
 }

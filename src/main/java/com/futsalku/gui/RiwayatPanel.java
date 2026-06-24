@@ -30,7 +30,6 @@ public class RiwayatPanel extends JPanel {
     private JTextField txtSearch;
     private TableRowSorter<DefaultTableModel> rowSorter;
 
-    @SuppressWarnings("deprecation")
     private final NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
 
     public RiwayatPanel() {
@@ -80,21 +79,8 @@ public class RiwayatPanel extends JPanel {
             public void changedUpdate(javax.swing.event.DocumentEvent e) { filterTable(); }
         });
 
-        JButton btnRefresh = new JButton("Refresh Data");
-        btnRefresh.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        btnRefresh.setBackground(new Color(37, 99, 235));
-        btnRefresh.setForeground(Color.WHITE);
-        btnRefresh.setFocusPainted(false);
-        btnRefresh.setPreferredSize(new Dimension(120, 35));
-        btnRefresh.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        btnRefresh.addActionListener(e -> {
-            txtSearch.setText("");
-            loadRiwayat();
-        });
-
         actionPanel.add(new JLabel("Pencarian: "));
         actionPanel.add(txtSearch);
-        actionPanel.add(btnRefresh);
 
         panel.add(actionPanel, BorderLayout.EAST);
         return panel;
@@ -111,10 +97,7 @@ public class RiwayatPanel extends JPanel {
         };
 
         tblRiwayat = new JTable(tableModel);
-        tblRiwayat.setRowHeight(35);
-        tblRiwayat.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        tblRiwayat.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
-        tblRiwayat.getTableHeader().setBackground(new Color(241, 245, 249));
+        TableStyleHelper.styleTable(tblRiwayat, new int[]{0, 1, 2, 5, 7});
 
         // Sorter untuk fitur pencarian
         rowSorter = new TableRowSorter<>(tableModel);
@@ -137,6 +120,14 @@ public class RiwayatPanel extends JPanel {
                 Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 setHorizontalAlignment(JLabel.CENTER);
                 setFont(new Font("Segoe UI", Font.BOLD, 12));
+                setBorder(BorderFactory.createEmptyBorder(0, 12, 0, 12));
+
+                // Zebra Background
+                if (isSelected) {
+                    c.setBackground(table.getSelectionBackground());
+                } else {
+                    c.setBackground(row % 2 == 0 ? Color.WHITE : new Color(248, 250, 252));
+                }
                 
                 String status = (value != null) ? value.toString() : "";
                 switch (status) {
@@ -199,5 +190,9 @@ public class RiwayatPanel extends JPanel {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Gagal memuat riwayat: " + e.getMessage());
         }
+    }
+
+    public void refreshData() {
+        loadRiwayat();
     }
 }

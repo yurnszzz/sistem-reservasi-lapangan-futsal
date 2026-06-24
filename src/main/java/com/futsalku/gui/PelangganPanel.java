@@ -4,7 +4,7 @@ import com.futsalku.dao.PelangganDAO;
 import com.futsalku.model.Pelanggan;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableCellRenderer;
+// import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
@@ -67,7 +67,7 @@ public class PelangganPanel extends JPanel {
         txtSearch.setFont(new Font("Segoe UI", Font.PLAIN, 14));
         txtSearch.setPreferredSize(new Dimension(200, 35));
         
-        JButton btnCari = createButton("Cari", new Color(100, 116, 139));
+        RoundedButton btnCari = new RoundedButton("Cari", new Color(100, 116, 139), Color.WHITE);
         btnCari.addActionListener(e -> refreshTableData(txtSearch.getText().trim()));
         
         searchPanel.add(new JLabel("Cari: "));
@@ -115,10 +115,10 @@ public class PelangganPanel extends JPanel {
         JPanel btnPanel = new JPanel(new GridLayout(2, 2, 10, 10));
         btnPanel.setBackground(Color.WHITE);
 
-        JButton btnSimpan = createButton("Simpan", new Color(37, 99, 235));
-        JButton btnUbah = createButton("Ubah", new Color(245, 158, 11));
-        JButton btnHapus = createButton("Hapus", new Color(220, 38, 38));
-        JButton btnClear = createButton("Bersihkan", new Color(100, 116, 139));
+        RoundedButton btnSimpan = new RoundedButton("Simpan", new Color(37, 99, 235), Color.WHITE);
+        RoundedButton btnUbah = new RoundedButton("Ubah", new Color(245, 158, 11), Color.WHITE);
+        RoundedButton btnHapus = new RoundedButton("Hapus", new Color(220, 38, 38), Color.WHITE);
+        RoundedButton btnClear = new RoundedButton("Bersihkan", new Color(100, 116, 139), Color.WHITE);
 
         // Event Listeners (Aksi Tombol)
         btnSimpan.addActionListener(e -> simpanData());
@@ -151,16 +151,7 @@ public class PelangganPanel extends JPanel {
         };
 
         tblPelanggan = new JTable(tableModel);
-        tblPelanggan.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        tblPelanggan.setRowHeight(30);
-        tblPelanggan.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 13));
-        tblPelanggan.getTableHeader().setBackground(new Color(241, 245, 249));
-
-        // Menengahkan teks di kolom tertentu
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        tblPelanggan.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        tblPelanggan.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
+        TableStyleHelper.styleTable(tblPelanggan, new int[]{0, 4});
 
         // Event saat baris tabel diklik (mengisi form otomatis)
         tblPelanggan.getSelectionModel().addListSelectionListener(e -> {
@@ -193,18 +184,6 @@ public class PelangganPanel extends JPanel {
         parent.add(txt);
         parent.add(Box.createVerticalStrut(15));
         return txt;
-    }
-
-    // Helper membuat tombol modern
-    private JButton createButton(String text, Color color) {
-        JButton btn = new JButton(text);
-        btn.setFont(new Font("Segoe UI", Font.BOLD, 13));
-        btn.setForeground(Color.WHITE);
-        btn.setBackground(color);
-        btn.setBorderPainted(false);
-        btn.setFocusPainted(false);
-        btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        return btn;
     }
 
     // ================= LOGIKA DATABASE (CRUD) ================= //
@@ -309,5 +288,9 @@ public class PelangganPanel extends JPanel {
         chkMember.setSelected(false);
         txtSearch.setText("");
         tblPelanggan.clearSelection();
+    }
+
+    public void refreshData() {
+        refreshTableData("");
     }
 }

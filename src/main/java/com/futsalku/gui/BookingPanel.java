@@ -9,12 +9,11 @@ import com.futsalku.model.Pelanggan;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,7 +28,9 @@ public class BookingPanel extends JPanel {
     // Komponen form
     private JComboBox<String> cmbLapangan;
     private JComboBox<String> cmbPelanggan;
-    private JTextField txtTanggal;
+    private JComboBox<Integer> cmbTanggalHari;
+    private JComboBox<String> cmbTanggalBulan;
+    private JComboBox<Integer> cmbTanggalTahun;
     private JComboBox<String> cmbJamMulai;
     private JSpinner spnDurasi;
     private JLabel lblTotalHarga;
@@ -43,7 +44,7 @@ public class BookingPanel extends JPanel {
     private List<Pelanggan> pelangganList;
 
     // Format Rupiah
-    @SuppressWarnings("deprecation")
+    // @SuppressWarnings("deprecation")
     private final NumberFormat rupiahFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
 
     public BookingPanel() {
@@ -130,14 +131,43 @@ public class BookingPanel extends JPanel {
         form.add(Box.createVerticalStrut(12));
 
         // Tanggal
-        form.add(createLabel("Tanggal (YYYY-MM-DD)"));
-        txtTanggal = new JTextField();
-        txtTanggal.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        txtTanggal.setMaximumSize(new Dimension(280, 32));
-        txtTanggal.setAlignmentX(Component.LEFT_ALIGNMENT);
-        // Set tanggal hari ini sebagai default
-        txtTanggal.setText(new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()));
-        form.add(txtTanggal);
+        form.add(createLabel("Tanggal Booking (Tgl - Bln - Thn)"));
+        JPanel datePanel = new JPanel(new GridLayout(1, 3, 5, 0));
+        datePanel.setOpaque(false);
+        datePanel.setMaximumSize(new Dimension(280, 32));
+        datePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        // Dropdown Tanggal (1-31)
+        Integer[] days = new Integer[31];
+        for (int i = 0; i < 31; i++) days[i] = i + 1;
+        cmbTanggalHari = new JComboBox<>(days);
+        cmbTanggalHari.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        cmbTanggalHari.setBackground(Color.WHITE);
+
+        // Dropdown Bulan (01-12)
+        String[] months = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+        cmbTanggalBulan = new JComboBox<>(months);
+        cmbTanggalBulan.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        cmbTanggalBulan.setBackground(Color.WHITE);
+
+        // Dropdown Tahun (Tahun saat ini + 5 tahun ke depan)
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        Integer[] years = new Integer[6];
+        for (int i = 0; i < 6; i++) years[i] = currentYear + i;
+        cmbTanggalTahun = new JComboBox<>(years);
+        cmbTanggalTahun.setFont(new Font("Segoe UI", Font.PLAIN, 13));
+        cmbTanggalTahun.setBackground(Color.WHITE);
+
+        // Set default ke hari ini
+        Calendar calToday = Calendar.getInstance();
+        cmbTanggalHari.setSelectedItem(calToday.get(Calendar.DAY_OF_MONTH));
+        cmbTanggalBulan.setSelectedIndex(calToday.get(Calendar.MONTH)); // Indeks 0 = "01"
+        cmbTanggalTahun.setSelectedItem(calToday.get(Calendar.YEAR));
+
+        datePanel.add(cmbTanggalHari);
+        datePanel.add(cmbTanggalBulan);
+        datePanel.add(cmbTanggalTahun);
+        form.add(datePanel);
         form.add(Box.createVerticalStrut(12));
 
         // Jam Mulai
@@ -192,13 +222,13 @@ public class BookingPanel extends JPanel {
         btnPanel.setMaximumSize(new Dimension(280, 40));
         btnPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        JButton btnTambah = createActionButton("Tambah", new Color(37, 99, 235));
+        RoundedButton btnTambah = new RoundedButton("Tambah", new Color(37, 99, 235), Color.WHITE);
         btnTambah.addActionListener(e -> tambahBooking());
 
-        JButton btnHapus = createActionButton("Hapus", new Color(220, 38, 38));
+        RoundedButton btnHapus = new RoundedButton("Hapus", new Color(220, 38, 38), Color.WHITE);
         btnHapus.addActionListener(e -> hapusBooking());
 
-        JButton btnRefresh = createActionButton("Refresh", new Color(100, 116, 139));
+        RoundedButton btnRefresh = new RoundedButton("Refresh", new Color(100, 116, 139), Color.WHITE);
         btnRefresh.addActionListener(e -> {
             loadComboBoxData();
             refreshTable();
@@ -234,13 +264,7 @@ public class BookingPanel extends JPanel {
         };
 
         tblBooking = new JTable(tableModel);
-        tblBooking.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        tblBooking.setRowHeight(28);
-        tblBooking.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
-        tblBooking.getTableHeader().setBackground(new Color(241, 245, 249));
-        tblBooking.getTableHeader().setForeground(new Color(51, 65, 85));
-        tblBooking.setSelectionBackground(new Color(219, 234, 254));
-        tblBooking.setGridColor(new Color(226, 232, 240));
+        TableStyleHelper.styleTable(tblBooking, new int[]{0, 4, 5, 7});
 
         // Atur lebar kolom
         tblBooking.getColumnModel().getColumn(0).setPreferredWidth(40);   // ID
@@ -251,14 +275,6 @@ public class BookingPanel extends JPanel {
         tblBooking.getColumnModel().getColumn(5).setPreferredWidth(50);   // Durasi
         tblBooking.getColumnModel().getColumn(6).setPreferredWidth(110);  // Total Harga
         tblBooking.getColumnModel().getColumn(7).setPreferredWidth(80);   // Status
-
-        // Center align untuk beberapa kolom
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
-        tblBooking.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
-        tblBooking.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
-        tblBooking.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
-        tblBooking.getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
 
         JScrollPane scrollPane = new JScrollPane(tblBooking);
         scrollPane.setBorder(BorderFactory.createLineBorder(new Color(226, 232, 240)));
@@ -355,13 +371,17 @@ public class BookingPanel extends JPanel {
                 return;
             }
 
-            // Parse tanggal
-            String tanggalStr = txtTanggal.getText().trim();
+            // Dapatkan tanggal dari Dropdown (format YYYY-MM-DD)
+            int hari = (int) cmbTanggalHari.getSelectedItem();
+            String bulan = (String) cmbTanggalBulan.getSelectedItem();
+            int tahun = (int) cmbTanggalTahun.getSelectedItem();
+            
+            String tanggalStr = String.format("%d-%s-%02d", tahun, bulan, hari);
             Date tanggal;
             try {
                 tanggal = Date.valueOf(tanggalStr);
             } catch (IllegalArgumentException e) {
-                JOptionPane.showMessageDialog(this, "Format tanggal salah! Gunakan YYYY-MM-DD", "Validasi", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Tanggal yang dipilih tidak valid (misal: 31 Februari)!", "Validasi", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
@@ -454,7 +474,7 @@ public class BookingPanel extends JPanel {
     }
 
     // Helper: Buat tombol aksi
-    private JButton createActionButton(String text, Color bgColor) {
+   /*  private JButton createActionButton(String text, Color bgColor) {
         JButton btn = new JButton(text);
         btn.setFont(new Font("Segoe UI", Font.BOLD, 12));
         btn.setForeground(Color.WHITE);
@@ -464,5 +484,10 @@ public class BookingPanel extends JPanel {
         btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         btn.setPreferredSize(new Dimension(80, 32));
         return btn;
+    } */
+
+    public void refreshData() {
+        loadComboBoxData();
+        refreshTable();
     }
 }

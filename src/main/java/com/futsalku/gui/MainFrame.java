@@ -12,6 +12,14 @@ public class MainFrame extends JFrame {
     private CardLayout cardLayout;
     private JButton activeButton;
 
+    // Instance variabel untuk panel agar bisa di-refresh
+    private DashboardPanel dashboardPanel;
+    private LapanganPanel lapanganPanel;
+    private PelangganPanel pelangganPanel;
+    private BookingPanel bookingPanel;
+    private PembayaranPanel pembayaranPanel;
+    private RiwayatPanel riwayatPanel;
+
     // Warna tema
     private static final Color SIDEBAR_BG = new Color(30, 41, 59);       // dark blue-gray
     private static final Color SIDEBAR_HOVER = new Color(51, 65, 85);    // lighter
@@ -36,13 +44,21 @@ public class MainFrame extends JFrame {
         contentPanel = new JPanel(cardLayout);
         contentPanel.setBackground(CONTENT_BG);
 
+        // Inisialisasi panel
+        dashboardPanel = new DashboardPanel();
+        lapanganPanel = new LapanganPanel();
+        pelangganPanel = new PelangganPanel();
+        bookingPanel = new BookingPanel();
+        pembayaranPanel = new PembayaranPanel();
+        riwayatPanel = new RiwayatPanel();
+
         // Tambahkan semua panel ke CardLayout
-        contentPanel.add(new DashboardPanel(), "dashboard");
-        contentPanel.add(new LapanganPanel(), "lapangan");
-        contentPanel.add(new PelangganPanel(), "pelanggan");
-        contentPanel.add(new BookingPanel(), "booking");
-        contentPanel.add(new PembayaranPanel(), "pembayaran");
-        contentPanel.add(new RiwayatPanel(), "riwayat");
+        contentPanel.add(dashboardPanel, "dashboard");
+        contentPanel.add(lapanganPanel, "lapangan");
+        contentPanel.add(pelangganPanel, "pelanggan");
+        contentPanel.add(bookingPanel, "booking");
+        contentPanel.add(pembayaranPanel, "pembayaran");
+        contentPanel.add(riwayatPanel, "riwayat");
 
         add(contentPanel, BorderLayout.CENTER);
 
@@ -167,9 +183,34 @@ public class MainFrame extends JFrame {
         btn.addActionListener(e -> {
             cardLayout.show(contentPanel, cardName);
             setActiveButton(btn);
+            refreshPanelData(cardName);
         });
 
         return btn;
+    }
+
+    // Refresh data panel saat berpindah menu tab
+    private void refreshPanelData(String cardName) {
+        switch (cardName) {
+            case "dashboard":
+                dashboardPanel.refreshData();
+                break;
+            case "lapangan":
+                lapanganPanel.refreshData();
+                break;
+            case "pelanggan":
+                pelangganPanel.refreshData();
+                break;
+            case "booking":
+                bookingPanel.refreshData();
+                break;
+            case "pembayaran":
+                pembayaranPanel.refreshData();
+                break;
+            case "riwayat":
+                riwayatPanel.refreshData();
+                break;
+        }
     }
 
     // Set tombol aktif (highlight)

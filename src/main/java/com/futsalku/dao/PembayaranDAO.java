@@ -22,7 +22,7 @@ public class PembayaranDAO {
     // Menggunakan Polymorphism: return PembayaranCash/PembayaranTransfer sesuai metode
     public List<Pembayaran> getAll() throws SQLException {
         List<Pembayaran> list = new ArrayList<>();
-        String sql = "SELECT * FROM pembayaran ORDER BY tgl_bayar DESC";
+        String sql = "SELECT * FROM pembayaran ORDER BY id_pembayaran ASC";
 
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();

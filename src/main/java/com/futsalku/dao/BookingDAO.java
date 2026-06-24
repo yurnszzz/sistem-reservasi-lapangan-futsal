@@ -18,7 +18,7 @@ public class BookingDAO {
     // Mengambil semua data booking dari database
     public List<Booking> getAll() throws SQLException {
         List<Booking> list = new ArrayList<>();
-        String sql = "SELECT * FROM booking ORDER BY tanggal DESC, jam_mulai ASC";
+        String sql = "SELECT * FROM booking ORDER BY id_booking ASC";
 
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();

@@ -20,7 +20,7 @@ public class PelangganDAO implements Searchable<Pelanggan> {
     // Mengambil semua data pelanggan dari database
     public List<Pelanggan> getAll() throws SQLException {
         List<Pelanggan> list = new ArrayList<>();
-        String sql = "SELECT * FROM pelanggan ORDER BY nama";
+        String sql = "SELECT * FROM pelanggan ORDER BY id_pelanggan ASC";
 
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
@@ -53,7 +53,7 @@ public class PelangganDAO implements Searchable<Pelanggan> {
     // Mengambil daftar pelanggan yang berstatus member
     public List<Pelanggan> getMembers() throws SQLException {
         List<Pelanggan> list = new ArrayList<>();
-        String sql = "SELECT * FROM pelanggan WHERE is_member = TRUE ORDER BY nama";
+        String sql = "SELECT * FROM pelanggan WHERE is_member = TRUE ORDER BY id_pelanggan ASC";
 
         try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement();
@@ -116,7 +116,7 @@ public class PelangganDAO implements Searchable<Pelanggan> {
     @Override
     public List<Pelanggan> cari(String keyword) {
         List<Pelanggan> list = new ArrayList<>();
-        String sql = "SELECT * FROM pelanggan WHERE nama LIKE ? OR no_telp LIKE ? OR email LIKE ? ORDER BY nama";
+        String sql = "SELECT * FROM pelanggan WHERE nama LIKE ? OR no_telp LIKE ? OR email LIKE ? ORDER BY id_pelanggan ASC";
 
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
