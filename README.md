@@ -213,7 +213,7 @@ private static final String PASSWORD = "your_password";
 ```
 
 ### 4. Jalankan Aplikasi
-Buka project di **IntelliJ IDEA**, lalu:
+Buka project di **IntelliJ IDEA** atau IDE lainnya, lalu:
 1. Tambahkan `mysql-connector-j-x.x.x.jar` ke project library
 2. Klik kanan `Main.java` → **Run 'Main'**
 
