@@ -260,8 +260,8 @@ Buka project di **IntelliJ IDEA** atau IDE lainnya, lalu:
 |------|-----|:---------:|:------:|
 | Integrasi GUI ↔ DAO ↔ Database | Hasan, Apip, Akbar | 🔴 High | ✅ |
 | Testing & Bug fixing | Hasan, Apip, Akbar | 🔴 High | ✅ |
-| Video demo program | Cantika, Varisha | 🔴 High | ⬜ |
-| Laporan akhir (format PDF) | Cantika, Varisha | 🔴 High | ⬜ |
+| Video demo program | Varisha | 🔴 High | ✅ |
+| Laporan akhir | Cantika, Varisha | 🔴 High | ⬜ |
 | Final review & submission | Full Team | 🔴 High | ⬜ |
 
 ### Ringkasan Peran
