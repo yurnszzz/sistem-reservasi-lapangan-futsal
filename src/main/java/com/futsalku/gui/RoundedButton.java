@@ -10,11 +10,13 @@ import java.awt.event.MouseEvent;
 public class RoundedButton extends JButton {
     private Color normalBg;
     private Color hoverBg;
+    private Color normalFg;
     private int radius = 12; // Radius sudut melengkung
 
     public RoundedButton(String text, Color bg, Color fg) {
         super(text);
         this.normalBg = bg;
+        this.normalFg = fg;
         // Tentukan warna hover otomatis sedikit lebih terang
         this.hoverBg = getHoverColor(bg);
 
@@ -64,8 +66,14 @@ public class RoundedButton extends JButton {
         Graphics2D g2 = (Graphics2D) g.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         
-        // Gambar background bulat
-        g2.setColor(getBackground());
+        // Gambar background bulat dengan warna sesuai status aktif/non-aktif
+        if (!isEnabled()) {
+            g2.setColor(new Color(226, 232, 240)); // Slate 200 (Abu-abu non-aktif)
+            setForeground(new Color(148, 163, 184)); // Slate 400 (Teks non-aktif)
+        } else {
+            g2.setColor(getBackground());
+            setForeground(normalFg != null ? normalFg : Color.WHITE);
+        }
         g2.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
         
         g2.dispose();

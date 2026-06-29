@@ -249,6 +249,71 @@ public class PembayaranPanel extends JPanel {
         });
 
         wrapper.add(new JScrollPane(tblRiwayat), BorderLayout.CENTER);
+
+        // Panel Aksi Konfirmasi Pembayaran di bagian bawah
+        JPanel pnlAction = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        pnlAction.setBackground(Color.WHITE);
+        pnlAction.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
+
+        RoundedButton btnKonfirmasi = new RoundedButton("Konfirmasi Pembayaran", new Color(16, 185, 129), Color.WHITE);
+        btnKonfirmasi.setPreferredSize(new Dimension(200, 35));
+        btnKonfirmasi.setEnabled(false);
+
+        // Listener pemilihan baris untuk mengaktifkan/menonaktifkan tombol
+        tblRiwayat.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                int selectedRow = tblRiwayat.getSelectedRow();
+                if (selectedRow != -1) {
+                    String status = tblRiwayat.getValueAt(selectedRow, 4).toString();
+                    btnKonfirmasi.setEnabled("Pending".equals(status));
+                } else {
+                    btnKonfirmasi.setEnabled(false);
+                }
+            }
+        });
+
+        // Aksi ketika tombol Konfirmasi Pembayaran diklik
+        btnKonfirmasi.addActionListener(e -> {
+            int selectedRow = tblRiwayat.getSelectedRow();
+            if (selectedRow != -1) {
+                int idBayar = (int) tblRiwayat.getValueAt(selectedRow, 0);
+                int idBooking = (int) tblRiwayat.getValueAt(selectedRow, 1);
+
+                int confirm = JOptionPane.showConfirmDialog(this,
+                        "Apakah Anda yakin ingin mengonfirmasi pembayaran transfer dengan ID " + idBayar + " menjadi Lunas?",
+                        "Konfirmasi Pembayaran", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+                if (confirm == JOptionPane.YES_OPTION) {
+                    try {
+                        // 1. Update status pembayaran menjadi Lunas di database
+                        if (pembayaranDAO.updateStatus(idBayar, "Lunas")) {
+                            // 2. Update status booking menjadi Done
+                            bookingDAO.updateStatus(idBooking, "Done");
+
+                            // 3. Tampilkan Struk Pembayaran
+                            Pembayaran p = pembayaranDAO.getById(idBayar);
+                            Booking b = bookingDAO.getById(idBooking);
+                            if (p != null && b != null) {
+                                tampilkanStruk(p, b.getTotalHarga());
+                            }
+
+                            JOptionPane.showMessageDialog(this, "Pembayaran berhasil dikonfirmasi!", "Sukses", JOptionPane.INFORMATION_MESSAGE);
+
+                            // 4. Segarkan data layar
+                            refreshAllData();
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Gagal mengonfirmasi pembayaran.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } catch (Exception ex) {
+                        JOptionPane.showMessageDialog(this, "Terjadi kesalahan: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+
+        pnlAction.add(btnKonfirmasi);
+        wrapper.add(pnlAction, BorderLayout.SOUTH);
+
         return wrapper;
     }
 
