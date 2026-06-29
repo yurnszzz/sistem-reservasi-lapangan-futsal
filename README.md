@@ -213,7 +213,7 @@ private static final String PASSWORD = "your_password";
 ```
 
 ### 4. Jalankan Aplikasi
-Buka project di **IntelliJ IDEA**, lalu:
+Buka project di **IntelliJ IDEA** atau IDE lainnya, lalu:
 1. Tambahkan `mysql-connector-j-x.x.x.jar` ke project library
 2. Klik kanan `Main.java` → **Run 'Main'**
 
@@ -258,10 +258,10 @@ Buka project di **IntelliJ IDEA**, lalu:
 
 | Task | PIC | Prioritas | Status |
 |------|-----|:---------:|:------:|
-| Integrasi GUI ↔ DAO ↔ Database | Hasan, Apip, Akbar | 🔴 High | ⬜ |
-| Testing & Bug fixing | Hasan, Apip, Akbar | 🔴 High | ⬜ |
-| Video demo program | Cantika, Varisha | 🔴 High | ⬜ |
-| Laporan akhir (format PDF) | Cantika, Varisha | 🔴 High | ⬜ |
+| Integrasi GUI ↔ DAO ↔ Database | Hasan, Apip, Akbar | 🔴 High | ✅ |
+| Testing & Bug fixing | Hasan, Apip, Akbar | 🔴 High | ✅ |
+| Video demo program | Varisha | 🔴 High | ✅ |
+| Laporan akhir | Cantika, Varisha | 🔴 High | ⬜ |
 | Final review & submission | Full Team | 🔴 High | ⬜ |
 
 ### Ringkasan Peran
